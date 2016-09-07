@@ -8,7 +8,7 @@ using namespace std;
 
 int main() {
     ios::sync_with_stdio(false);
-    long n_house, total, house, a, b, house_a = 0, house_b = 0;
+    long n_house, total, house, a, b, current_total;
     set<long> houses;
 
     cin >> n_house;
@@ -23,17 +23,16 @@ int main() {
     for(set<long>::iterator house_it = houses.begin(); house_it != houses.end(); house_it++) {
       a = *house_it;
 
-      for(set<long>::iterator house_it2 = house_it; house_it2 != houses.end(); house_it2++) {
-          b = *house_it2;
-          int temp_total = a + b;
-          if(temp_total == total) {
-            house_a = a;
-            house_b = b;
-          }
+      current_total = total - a;
+      set<long>::iterator it2 = houses.find(current_total);
+
+      if(it2 != houses.end()) {
+        b = *it2;
+        break;
       }
     }
 
-    cout << house_a << " " << house_b;
+    cout << a << " " << b;
 
     return 0;
 }

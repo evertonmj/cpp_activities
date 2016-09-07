@@ -41,7 +41,8 @@ int main() {
 
          for(vector<string>::iterator it = music_tokens.begin(); it != music_tokens.end(); it++) {
            if(dictionary.find(*it) != dictionary.end()) {
-             cout << dictionary.find(*it)->second;
+             //cout << dictionary.find(*it)->second;
+             cout << dictionary[*it];
            } else {
              cout << *it;
            }
