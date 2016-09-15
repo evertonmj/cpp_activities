@@ -5,11 +5,10 @@
 #include <map>
 #include <vector>
 #include <string>
-#include <sstream>
-#include <algorithm>
-#include <iterator>
 
 using namespace std;
+
+vector<string> splitWords(string line);
 
 int main() {
   int n_instances, n_dic_words, n_music_lines;
@@ -34,24 +33,38 @@ int main() {
         vector<string> music_tokens;
         std::getline(cin, music_line);
 
-        istringstream iss(music_line);
-        copy(istream_iterator<string>(iss),
-         istream_iterator<string>(),
-         back_inserter(music_tokens));
+        music_tokens = splitWords(music_line);
 
-         for(vector<string>::iterator it = music_tokens.begin(); it != music_tokens.end(); it++) {
-           if(dictionary.find(*it) != dictionary.end()) {
-             //cout << dictionary.find(*it)->second;
-             cout << dictionary[*it];
-           } else {
-             cout << *it;
-           }
-
-           cout << " ";
+       for(vector<string>::iterator it = music_tokens.begin(); it != music_tokens.end(); it++) {
+         if(dictionary.find(*it) != dictionary.end()) {
+           cout << dictionary[*it];
+         } else {
+           cout << *it;
          }
-         cout << endl;
+
+         cout << " ";
+       }
+       cout << endl;
       }
   }
 
   return 0;
+}
+
+vector<string> splitWords(string line) {
+  vector<string> words;
+  string word;
+
+  for(int i = 0; i < line.size(); i++) {
+    if(line[i] != ' ') {
+      word += line[i];
+    } else {
+      words.push_back(word);
+      word = "";
+    }
+  }
+
+  words.push_back(word);
+
+  return words;
 }
