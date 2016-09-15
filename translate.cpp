@@ -8,8 +8,11 @@
 
 using namespace std;
 
-vector<string> splitWords(string line);
+vector<string> splitWords(string line, char separator);
 
+/**
+* main function
+*/
 int main() {
   int n_instances, n_dic_words, n_music_lines;
   string word, trans, music_line, music_word;
@@ -33,7 +36,8 @@ int main() {
         vector<string> music_tokens;
         std::getline(cin, music_line);
 
-        music_tokens = splitWords(music_line);
+        //split line by a blank space
+        music_tokens = splitWords(music_line, ' ');
 
        for(vector<string>::iterator it = music_tokens.begin(); it != music_tokens.end(); it++) {
          if(dictionary.find(*it) != dictionary.end()) {
@@ -51,12 +55,15 @@ int main() {
   return 0;
 }
 
-vector<string> splitWords(string line) {
+/**
+* Function to split a line by a specific separator
+*/
+vector<string> splitWords(string line, char separator) {
   vector<string> words;
   string word;
 
   for(int i = 0; i < line.size(); i++) {
-    if(line[i] != ' ') {
+    if(line[i] != separator) {
       word += line[i];
     } else {
       words.push_back(word);
@@ -64,6 +71,7 @@ vector<string> splitWords(string line) {
     }
   }
 
+  //insert the last word in the vector
   words.push_back(word);
 
   return words;
