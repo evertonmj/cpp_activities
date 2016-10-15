@@ -1,4 +1,5 @@
 //quermesse.cpp
+//http://br.spoj.com/problems/QUERM/
 #include <iostream>
 #include <list>
 
